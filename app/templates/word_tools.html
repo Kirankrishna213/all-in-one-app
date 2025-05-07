@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Word Tools</h2>
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Upload Word Document (.docx)</label>
+                <input class="form-control" type="file" name="word_file" accept=".docx">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Text to find</label>
+                <input class="form-control" type="text" name="find_text" placeholder="old">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Replacement text</label>
+                <input class="form-control" type="text" name="replace_text" placeholder="new">
+            </div>
+            <button type="submit" class="btn btn-primary">Process Document</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

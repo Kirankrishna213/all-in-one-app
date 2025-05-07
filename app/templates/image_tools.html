@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-image me-2"></i>Premium Image Editor</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-4 text-center">
+                        <label class="btn btn-primary btn-lg">
+                            <i class="fas fa-upload me-2"></i> Choose Image
+                            <input type="file" name="image_file" accept="image/*" hidden onchange="previewImage(this)">
+                        </label>
+                        <div id="image-preview" class="mt-3" style="display:none;">
+                            <img id="preview" src="#" alt="Preview" class="img-fluid rounded" style="max-height: 300px;">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="slider-container">
+                                <label for="brightness">Brightness</label>
+                                <input type="range" class="form-range" min="0" max="2" step="0.1" value="1" name="brightness">
+                                <div class="d-flex justify-content-between">
+                                    <small>Dark</small>
+                                    <small>Normal</small>
+                                    <small>Bright</small>
+                                </div>
+                            </div>
+
+                            <div class="slider-container">
+                                <label for="contrast">Contrast</label>
+                                <input type="range" class="form-range" min="0" max="2" step="0.1" value="1" name="contrast">
+                                <div class="d-flex justify-content-between">
+                                    <small>Low</small>
+                                    <small>Normal</small>
+                                    <small>High</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="slider-container">
+                                <label for="sharpness">Sharpness</label>
+                                <input type="range" class="form-range" min="0" max="2" step="0.1" value="1" name="sharpness">
+                                <div class="d-flex justify-content-between">
+                                    <small>Soft</small>
+                                    <small>Normal</small>
+                                    <small>Sharp</small>
+                                </div>
+                            </div>
+
+                            <div class="slider-container">
+                                <label for="blur_radius">Blur</label>
+                                <input type="range" class="form-range" min="0" max="5" step="0.1" value="0" name="blur_radius">
+                                <div class="d-flex justify-content-between">
+                                    <small>None</small>
+                                    <small>Medium</small>
+                                    <small>Strong</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-magic me-2"></i> Process Image
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function previewImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            document.getElementById('image-preview').style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{% endblock %}
